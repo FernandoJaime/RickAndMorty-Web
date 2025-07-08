@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rick and Morty</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">Rick and Morty</h1>
+            <p class="subtitle">Personajes</p>
+        </header>
+
+        <!-- Filtros -->
+        <section class="filters">
+            <div class="filters-container">
+                <div class="filter-group">
+                    <label for="nameFilter">Nombre:</label>
+                    <input type="text" id="nameFilter" placeholder="Buscar por nombre...">
+                </div>
+                
+                <div class="filter-group">
+                    <label for="statusFilter">Estado:</label>
+                    <select id="statusFilter">
+                        <option value="">Todos</option>
+                        <option value="alive">Vivo</option>
+                        <option value="dead">Muerto</option>
+                        <option value="unknown">Desconocido</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="genderFilter">Genero:</label>
+                    <select id="genderFilter">
+                        <option value="">Todos</option>
+                        <option value="female">Femenino</option>
+                        <option value="male">Masculino</option>
+                        <option value="genderless">Sin genero</option>
+                        <option value="unknown">Desconocido</option>
+                    </select>
+                </div>
+                
+                <button id="applyFilters" class="apply-btn">Aplicar Filtros</button>
+            </div>
+        </section>
+
+        <!-- Cargando por si tarda en cargar -->
+        <div id="loading" class="loading hidden">
+            <div class="portal"></div>
+            <p>Cargando personajes...</p>
+        </div>
+
+        <!-- Mensaje de error -->
+        <div id="message" class="message hidden"></div>
+
+        <!-- Grilla de personajes -->
+        <section class="characters-section">
+            <div id="charactersGrid" class="characters-grid"></div>
+        </section>
+
+        <!-- Paginacion -->
+        <section class="pagination">
+            <div class="pagination-container">
+                <button id="prevPage" class="pagination-btn"><<<</button>
+                <span id="pageInfo" class="page-info">Pagina 1</span>
+                <button id="nextPage" class="pagination-btn">>>></button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal de detalles al clikear un personaje -->
+    <div id="characterModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
