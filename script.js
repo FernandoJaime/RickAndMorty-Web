@@ -1,8 +1,8 @@
-// API Configuration
-const API_BASE_URL = 'https://rickandmortyapi.com/api';
-const CHARACTERS_PER_PAGE = 20;
+// Configuración de la API
+const url_api = 'https://rickandmortyapi.com/api';
+const personajes_por_pagina = 20; // Cantidad de personajes que se mostrarán en cada pagina
 
-// Global State
+// Estado global (variables que se usarán en todo el programa)
 let currentPage = 1;
 let totalPages = 1;
 let currentFilters = {
@@ -11,7 +11,7 @@ let currentFilters = {
     gender: ''
 };
 
-// DOM Elements
+// DOM Elements (obtengo todos los elementos que se usarán)
 const elements = {
     nameFilter: document.getElementById('nameFilter'),
     statusFilter: document.getElementById('statusFilter'),
@@ -28,27 +28,31 @@ const elements = {
     closeModal: document.querySelector('.close')
 };
 
-// Utility Functions
+// Funcion para mostrar el loading y ocultar el mensaje de error 
 function showLoading() {
     elements.loading.classList.remove('hidden');
     elements.message.classList.add('hidden');
-    elements.charactersGrid.innerHTML = '';
+    elements.charactersGrid.innerHTML = ''; // Limpio la grilla de personajes
 }
 
+// Funcion para ocultar el loading cuando ya recibi los datos de la API
 function hideLoading() {
     elements.loading.classList.add('hidden');
 }
 
+// Funcion para mostrar el mensaje de error
 function showMessage(text, type = 'error') {
     elements.message.textContent = text;
     elements.message.className = `message ${type}`;
     elements.message.classList.remove('hidden');
 }
 
+// Funcion para ocultar el mensaje de error
 function hideMessage() {
     elements.message.classList.add('hidden');
 }
 
+// Funcion para construir la URL para hacer la solicitud a la API de personajes (segun que filtros se le pasen)
 function buildApiUrl(page = 1, filters = {}) {
     const params = new URLSearchParams();
     
@@ -69,50 +73,52 @@ function buildApiUrl(page = 1, filters = {}) {
     }
     
     const queryString = params.toString();
-    return `${API_BASE_URL}/character${queryString ? `?${queryString}` : ''}`;
+    return `${url_api}/character${queryString ? `?${queryString}` : ''}`;
 }
 
+// Funcion para validar los filtros (si no se le pasan filtros, no se hace la solicitud a la API)
 function validateFilters(filters) {
     const hasFilters = filters.name.trim() || filters.status || filters.gender;
     
     if (!hasFilters) {
-        showMessage('Please fill at least one filter field', 'error');
+        showMessage('Por favor, rellene al menos un campo de filtro', 'error');
         return false;
     }
     
     return true;
 }
 
-// API Functions
+// Funcion para obtener los datos basandonos en la página actual y en los filtros aplicados
 async function fetchCharacters(page = 1, filters = {}) {
     try {
         const url = buildApiUrl(page, filters);
-        const response = await fetch(url);
+        const response = await fetch(url); // Petición HTTP GET a la API
         
         if (!response.ok) {
             if (response.status === 404) {
-                throw new Error('No characters found with the specified filters');
+                throw new Error('No se encontraron personajes con los filtros especificados');
             }
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        const data = await response.json();
+        const data = await response.json(); // Convierto la respuesta a JSON
         return data;
     } catch (error) {
-        console.error('Error fetching characters:', error);
+        console.error('Error al obtener los personajes:', error);
         throw error;
     }
 }
 
-// UI Functions
+// Funcion para crear la tarjeta de cada personaje 
 function createCharacterCard(character) {
-    const card = document.createElement('div');
-    card.className = 'character-card';
+    const card = document.createElement('div'); // Creo un div para la tarjeta
+    card.className = 'character-card'; 
     card.dataset.characterId = character.id;
     
     const statusClass = `status-${character.status.toLowerCase()}`;
     
-    card.innerHTML = `
+    // Creo el HTML de la tarjeta con los datos del personaje
+    card.innerHTML = ` 
         <img src="${character.image}" alt="${character.name}" class="character-image">
         <div class="character-info">
             <h3 class="character-name">${character.name}</h3>
@@ -137,26 +143,28 @@ function createCharacterCard(character) {
         </div>
     `;
     
-    // Add click event to show character details
+    // Añado un evento al hacer click sobre la tarjeta para mostrar el modal con más detalles del pj
     card.addEventListener('click', () => showCharacterModal(character));
     
     return card;
 }
 
+// Funcion para renderizar los personajes en la grilla (limpia la grilla y crea las tarjetas de cada personaje)
 function renderCharacters(characters) {
     elements.charactersGrid.innerHTML = '';
     
     if (characters.length === 0) {
-        showMessage('No characters found', 'error');
+        showMessage('No se encontraron personajes.', 'error');
         return;
     }
     
-    characters.forEach(character => {
+    characters.forEach(character => { // Creo una tarjeta para cada personaje con la funcion de arriba
         const card = createCharacterCard(character);
-        elements.charactersGrid.appendChild(card);
+        elements.charactersGrid.appendChild(card); // Añado la tarjeta al contenedor de la grilla
     });
 }
 
+// Funcion para actualizar la paginación (actualiza el numero de pagina actual y el total de paginas)
 function updatePagination(info) {
     currentPage = info.currentPage;
     totalPages = info.pages;
@@ -166,6 +174,7 @@ function updatePagination(info) {
     elements.nextPageBtn.disabled = currentPage >= totalPages;
 }
 
+// Funcion para mostrar el modal con más detalles del personaje seleccionado
 function showCharacterModal(character) {
     const statusClass = `status-${character.status.toLowerCase()}`;
     
@@ -205,11 +214,12 @@ function showCharacterModal(character) {
     elements.characterModal.classList.remove('hidden');
 }
 
+// Funcion para ocultar el modal
 function hideCharacterModal() {
     elements.characterModal.classList.add('hidden');
 }
 
-// Main Functions
+// Funcion para cargar los personajes (se llama cuando se aplica un filtro o se cambia de pagina)
 async function loadCharacters(page = 1, filters = {}) {
     try {
         showLoading();
@@ -231,6 +241,7 @@ async function loadCharacters(page = 1, filters = {}) {
     }
 }
 
+// Funcion para aplicar los filtros (se llama cuando se hace click en el boton de aplicar filtros)
 async function applyFilters() {
     const filters = {
         name: elements.nameFilter.value,
@@ -247,34 +258,23 @@ async function applyFilters() {
     await loadCharacters(currentPage, filters);
 }
 
+// Funcion para cargar la pagina siguiente (se llama cuando se hace click en el boton de siguiente pagina)
 async function loadNextPage() {
     if (currentPage < totalPages) {
         await loadCharacters(currentPage + 1, currentFilters);
     }
 }
 
+// Funcion para cargar la pagina anterior (se llama cuando se hace click en el boton de anterior pagina)
 async function loadPrevPage() {
     if (currentPage > 1) {
         await loadCharacters(currentPage - 1, currentFilters);
     }
 }
 
-// Event Listeners
+// Evemto de click para aplicar los filtros
 elements.applyFiltersBtn.addEventListener('click', applyFilters);
-
-elements.prevPageBtn.addEventListener('click', loadPrevPage);
-elements.nextPageBtn.addEventListener('click', loadNextPage);
-
-elements.closeModal.addEventListener('click', hideCharacterModal);
-
-// Close modal when clicking outside
-elements.characterModal.addEventListener('click', (e) => {
-    if (e.target === elements.characterModal) {
-        hideCharacterModal();
-    }
-});
-
-// Allow Enter key to apply filters
+// Tambien para aplicar los filtros cuando se presiona enter
 [elements.nameFilter, elements.statusFilter, elements.genderFilter].forEach(element => {
     element.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
@@ -283,8 +283,20 @@ elements.characterModal.addEventListener('click', (e) => {
     });
 });
 
-// Initialize the application
+// Evento de click para cargar la pagina siguiente y la anterior
+elements.prevPageBtn.addEventListener('click', loadPrevPage);
+elements.nextPageBtn.addEventListener('click', loadNextPage);
+
+// Evento de click para cerrar el modal con la info
+elements.closeModal.addEventListener('click', hideCharacterModal);
+// Tambien para cerrar el modal pero cuando se toca afuera
+elements.characterModal.addEventListener('click', (e) => {
+    if (e.target === elements.characterModal) {
+        hideCharacterModal();
+    }
+});
+
+// Inicializo la aplicación (carga los personajes sin filtros)
 document.addEventListener('DOMContentLoaded', () => {
-    // Load initial characters without filters
     loadCharacters(1, {});
 });

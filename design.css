@@ -1,4 +1,4 @@
-/* Reset and Base Styles */
+/* Estilos generales */
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +10,7 @@ body {
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
     color: #fff;
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Ocultar la barra de desplazamiento horizontal */
 }
 
 .container {
@@ -19,7 +19,7 @@ body {
     padding: 20px;
 }
 
-/* Header Styles */
+/* Header */
 .header {
     text-align: center;
     margin-bottom: 40px;
@@ -29,13 +29,12 @@ body {
 .title {
     font-size: 3.5rem;
     font-weight: 900;
-    background: linear-gradient(45deg, #00ff88, #00d4ff, #ff6b6b, #ffd93d);
+    background: linear-gradient(45deg, #00ff88, #00d4ff);
     background-size: 400% 400%;
-    -webkit-background-clip: text;
+    -webkit-background-clip: text; 
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: gradientShift 3s ease-in-out infinite;
-    text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.5); /* Sombra brillante del texto */
     margin-bottom: 10px;
 }
 
@@ -43,34 +42,24 @@ body {
     font-size: 1.2rem;
     color: #00d4ff;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    animation: glow 2s ease-in-out infinite alternate;
+    letter-spacing: 3px; /* Espaciado entre letras */
 }
 
-@keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
-
-@keyframes glow {
-    from { text-shadow: 0 0 10px #00d4ff; }
-    to { text-shadow: 0 0 20px #00d4ff, 0 0 30px #00d4ff; }
-}
-
-/* Filters Section */
+/* Filtros */
 .filters {
     background: rgba(0, 0, 0, 0.3);
     border: 2px solid #00ff88;
     border-radius: 15px;
     padding: 25px;
     margin-bottom: 30px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */
     box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
 }
 
+/* Campos de los filtros */
 .filters-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Columnas de los filtros */
     gap: 20px;
     align-items: end;
 }
@@ -98,24 +87,27 @@ body {
     color: #fff;
     font-family: 'Orbitron', monospace;
     font-size: 1rem;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; /* Transición suave para los filtros */
 }
 
+/* Animaciones para los filtros */
 .filter-group input:focus,
-.filter-group select:focus {
+.filter-group select:focus { /* Efecto cuando se selecciona un filtro */
     outline: none;
     border-color: #00d4ff;
     box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
-    transform: translateY(-2px);
+    transform: translateY(-2px); /* Efecto de elevación */
 }
 
+/* Texto del placeholder de los filtros */
 .filter-group input::placeholder {
     color: rgba(255, 255, 255, 0.6);
 }
 
+/* Boton de aplicar filtros */
 .apply-btn {
     padding: 15px 30px;
-    background: linear-gradient(45deg, #00ff88, #00d4ff);
+    background: linear-gradient(45deg, #00ff88, #00d4ff); /* Mismo gradiente que el titulo */
     border: none;
     border-radius: 8px;
     color: #000;
@@ -123,46 +115,50 @@ body {
     font-weight: 700;
     font-size: 1rem;
     text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    cursor: pointer; /* Cambio el cursor al estilo de “mano” al pasar el mouse */
+    transition: all 0.3s ease; 
     box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
 }
 
+/* Efecto al pasar el mouse sobre el boton de aplicar filtros */
 .apply-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5);
+    box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5); /* Aumento un poco la sombra */
 }
 
+/* Efecto al presionar el boton de aplicar filtros */
 .apply-btn:active {
     transform: translateY(-1px);
 }
 
-/* Loading Animation */
+/* Animación de carga */
 .loading {
     text-align: center;
     padding: 40px;
 }
 
-.loading.hidden {
+.loading.hidden { /* Solo se muestra cuando no se esta cargando */
     display: none;
 }
 
+/* Circulo de giro del portal */
 .portal {
     width: 60px;
     height: 60px;
     border: 4px solid #00ff88;
     border-top: 4px solid transparent;
     border-radius: 50%;
-    animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite; /* Utilozo la animacion de giro del portal */
     margin: 0 auto 20px;
 }
 
+/* Animacion de giro del portal */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
-/* Message Styles */
+/* Estilos de los mensajes */
 .message {
     text-align: center;
     padding: 20px;
@@ -177,19 +173,21 @@ body {
     display: none;
 }
 
+/* Estilos de los mensajes de error */
 .message.error {
     background: rgba(255, 107, 107, 0.2);
     border: 2px solid #ff6b6b;
     color: #ff6b6b;
 }
 
+/* Estilos de los mensajes de exito */
 .message.success {
     background: rgba(0, 255, 136, 0.2);
     border: 2px solid #00ff88;
     color: #00ff88;
 }
 
-/* Characters Grid */
+/* Grilla de personajes */
 .characters-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -197,6 +195,7 @@ body {
     margin-bottom: 40px;
 }
 
+/* Estilo tarjeta de cada personaje */
 .character-card {
     background: rgba(0, 0, 0, 0.4);
     border: 2px solid #00ff88;
@@ -207,20 +206,21 @@ body {
     backdrop-filter: blur(10px);
 }
 
-.character-card:hover {
+.character-card:hover { /* Efecto al pasar el mouse sobre la tarjeta */
     transform: translateY(-10px) scale(1.02);
     box-shadow: 0 15px 35px rgba(0, 255, 136, 0.4);
     border-color: #00d4ff;
 }
 
-.character-image {
+.character-image { 
     width: 100%;
     height: 250px;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
 
-.character-card:hover .character-image {
+/* Al pasar el mouse sobre la tarjeta, agrando un poco la imagen */
+.character-card:hover .character-image { 
     transform: scale(1.1);
 }
 
@@ -242,14 +242,16 @@ body {
     gap: 8px;
 }
 
+/* Estilos de los detalles de cada personaje */
 .character-detail {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Espacio entre los detalles */
     align-items: center;
     padding: 5px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* El ultimo detalle no tiene borde */
 .character-detail:last-child {
     border-bottom: none;
 }
@@ -267,25 +269,25 @@ body {
     font-weight: 500;
 }
 
+/* Color de cada estado de los personajes */
 .status-alive {
     color: #00ff88;
 }
-
 .status-dead {
     color: #ff6b6b;
 }
-
 .status-unknown {
     color: #ffd93d;
 }
 
-/* Pagination */
+/* Paginación */
 .pagination {
     display: flex;
     justify-content: center;
     margin-top: 40px;
 }
 
+/* Contenedor de los botones de paginación */
 .pagination-container {
     display: flex;
     align-items: center;
@@ -296,25 +298,28 @@ body {
     border: 2px solid #00ff88;
 }
 
+/* Botones de paginación */
 .pagination-btn {
     padding: 10px 20px;
-    background: linear-gradient(45deg, #00ff88, #00d4ff);
+    background: linear-gradient(45deg, #00ff88, #00d4ff); /* Mismo gradiente que el titulo */
     border: none;
     border-radius: 6px;
     color: #000;
     font-family: 'Orbitron', monospace;
     font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    cursor: pointer; /* Cambio el cursor al estilo de “mano” al pasar el mouse */
+    transition: all 0.3s ease; /* Transición suave para los botones */
     text-transform: uppercase;
     font-size: 0.9rem;
 }
 
+/* Efecto al pasar el mouse sobre el boton de paginación */
 .pagination-btn:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4);
 }
 
+/* Efecto al deshabilitar el boton de paginación */
 .pagination-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -328,26 +333,27 @@ body {
     letter-spacing: 1px;
 }
 
-/* Modal Styles */
+/* Estilos del modal */
 .modal {
     position: fixed;
-    z-index: 1000;
+    z-index: 1000; /* Para que el modal se muestre por encima de los otros elementos */
     left: 0;
-    top: 0;
+    top: 0; 
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
+    backdrop-filter: blur(5px); /* Efecto de desenfoque */
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
 }
 
-.modal.hidden {
+.modal.hidden { /* Solo se muestra cuando se selecciona un personaje */
     display: none;
 }
 
+/* Contenedor del modal (informacion completa del personaje seleccionado)*/
 .modal-content {
     background: linear-gradient(135deg, #1a1a2e, #16213e);
     border: 3px solid #00ff88;
@@ -359,6 +365,7 @@ body {
     box-shadow: 0 0 50px rgba(0, 255, 136, 0.5);
 }
 
+/* Boton de cerrar el modal */
 .close {
     position: absolute;
     top: 15px;
@@ -374,7 +381,25 @@ body {
     color: #ffd93d;
 }
 
-/* Responsive Design */
+/* Footer */
+.footer {
+    width: 100%;
+    text-align: center;
+    padding: 25px 0 15px 0;
+    background: none;
+    color: #00d4ff;
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin-top: 40px;
+    opacity: 0.8;
+}
+
+.footer a {
+    color: inherit;  
+}
+
+/* Responsive */
 @media (max-width: 768px) {
     .title {
         font-size: 2.5rem;
@@ -422,19 +447,24 @@ body {
         max-width: 320px;
         margin: 0 auto;
     }
+
+    .footer {
+        font-size: 0.9rem;
+        padding: 18px 0 10px 0;
+    }
 }
 
-/* Scrollbar Styling */
+/* Estilos de la barra de desplazamiento */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 10px; /* Ancho de la barra de desplazamiento */
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.3); /* Fondo de la barra de desplazamiento */
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(45deg, #00ff88, #00d4ff);
+    background: linear-gradient(45deg, #00ff88, #00d4ff); /* Mismo gradiente que el titulo */
     border-radius: 5px;
 }
 

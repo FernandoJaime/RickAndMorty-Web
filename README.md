@@ -1,10 +1,10 @@
-# Rick and Morty Character 
+# Rick and Morty Personajes 
 
 Una aplicación web interactiva que consume la API de Rick and Morty para explorar todos los personajes de la serie.
 
-🌐 
+🌐 https://fernandojaime.github.io/RickAndMorty-Web/
 
-## 🚀 Características
+## 🧪 Características
 
 - **Exploración de Personajes**: Visualiza todos los personajes de Rick and Morty con sus imágenes y detalles
 - **Filtros Avanzados**: 
@@ -16,7 +16,7 @@ Una aplicación web interactiva que consume la API de Rick and Morty para explor
 
 ## 🚀 Cómo Usar
 
-1. **Ingresa a** 
+1. **Ingresa a** https://fernandojaime.github.io/RickAndMorty-Web/
 2. **Explora** los personajes usando los filtros disponibles
 3. **Haz clic** en cualquier personaje para ver más detalles
 4. **Si queres podes clonar o descargar** el proyecto y **abrir** `index.html` en tu navegador web
